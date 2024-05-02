@@ -19,7 +19,3 @@ testing_error
 \description{
 Calculation of testing_error. This function can be used on the output of mice.impute.xgb.
 }
-\examples{
-testing_error(nhanes, imp_res)
-
-}

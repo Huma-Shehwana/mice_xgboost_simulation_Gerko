@@ -9,7 +9,7 @@ xgb_param_calc(
   response = NULL,
   select_features = NULL,
   num_cores = 1,
-  iter = 30
+  iter = 50
 )
 }
 \arguments{

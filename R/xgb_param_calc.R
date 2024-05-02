@@ -13,8 +13,11 @@
 #' @import mlrMBO
 #' @import xgboost
 #' @import ggplot2
+#' @import xgboost
+#' @importFrom stats setNames
+#' @importFrom Matrix sparse.model.matrix
 
-xgb_param_calc<-function(data,response = NULL, select_features=NULL, num_cores = 1, iter=30){
+xgb_param_calc<-function(data,response = NULL, select_features=NULL, num_cores = 1, iter=50){
   
   
   ##############################################################################
@@ -229,7 +232,7 @@ par_opt <- function(cc.data, training_features, response_var, nfold = 5, iter = 
           objective = obj.type, 
           eval_metric = eval.metric),
           data = dtrain,
-          nround = nround,
+          nrounds = nround,
           early_stopping_rounds = early_stopping_rounds,
           folds = cv_folds,
           prediction = FALSE,
@@ -250,7 +253,7 @@ par_opt <- function(cc.data, training_features, response_var, nfold = 5, iter = 
           objective = obj.type, 
           eval_metric = eval.metric),
           data = dtrain,
-          nround = nround,
+          nrounds = nround,
           early_stopping_rounds = early_stopping_rounds,
           folds = cv_folds,
           prediction = FALSE,
@@ -290,10 +293,13 @@ par_opt <- function(cc.data, training_features, response_var, nfold = 5, iter = 
     run = mbo(fun = obj.fun, 
               control = control, 
               design = des)
-    
     # plot of iterations on x-axis and evaluation metric on x-axis
-    plot_fig<-run$opt.path$env$path  %>% 
-      mutate(Round = row_number()) %>% ggplot(aes(x= Round, y= y)) + 
+    
+    fig_data <- run$opt.path$env$path
+    fig_data$Round <- rownames(fig_data)
+    
+    plot_fig <- fig_data %>% 
+      ggplot(aes(x= Round, y= y)) + 
       geom_point() +
       labs(title = sprintf("Response Variable: %s , Features: %s", response_var, paste(training_features,collapse = ",")))+
       ylab(sprintf("Evaluation score %s", eval.metric)) + theme(plot.title = element_text(hjust = 0.5))

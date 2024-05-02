@@ -465,6 +465,7 @@ mice <- function(data,
   midsobj <- list(
     data = data,
     imp = q$imp,
+    trainError = q$trainError,
     m = m,
     where = where,
     blocks = blocks,

@@ -9,10 +9,9 @@ train_testplot<-function(orig_data, impute_res,prop_values, output_name){
   #####################     Calculation of testing Error      #############################
   #########################################################################################
  
-  
   test_error_all <- map(impute_res, .f = function(one_p){   # call to testing_error function form mice to calculate test error
     future_map2(orig_data, one_p, .f = function(orig_data_1,imputed_res_1) { 
-                testing_error(orig_data_1,imputed_res_1)}, .options = furrr_options(seed = TRUE))
+                mice::testing_error(orig_data_1,imputed_res_1)}, .options = furrr_options(seed = TRUE))
     })
   
   
@@ -35,7 +34,6 @@ train_testplot<-function(orig_data, impute_res,prop_values, output_name){
                  Dataset = inner_index)
       })
     }) # add percentage and dataset index to training error list
-    
     
     trainingError_df <- do.call(rbind, do.call(c, trainingErrorArranged)) # convert to dataframe
     trainingError_df$variable <- i # add variable name

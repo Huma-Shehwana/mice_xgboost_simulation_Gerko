@@ -36,8 +36,6 @@ mice.impute.xgb<- function(y, ry, x, wy=NULL,xgb.params = NULL, nthreads = -1,ma
   print_every_n = 50 # to make console less crowded but to also check if algorithm is also working.
   verbose = 0
   
-  
-  
   #if no hyperparameters are provided, algorithm uses default set of parameters adapted from Deng etal, 2023
   # If only one set of hyperparameters are provided it is sued to impute all variables, otherwise, hyperparameters specific to each variable is sued to train the model
   

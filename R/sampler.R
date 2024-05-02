@@ -268,7 +268,6 @@ sampler.univ <- function(data, r, where, pred, formula, method, yname, k,
     return(list("imputes"=imputes, "err"=err))
   } else {
     imputes[cc] <- imputes_combined
-    imputes
+    return(imputes)
   }
-  imputes
 }

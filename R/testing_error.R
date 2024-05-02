@@ -7,7 +7,9 @@
 #' 
 #'testing_error
 #' @examples
-#' testing_error(nhanes, imp_res)
+#' nb <- mice(nhanes, method = "xgb")
+#' testing_error(nhanes, nb)
+#' 
 #'
 #' @export
 #' 

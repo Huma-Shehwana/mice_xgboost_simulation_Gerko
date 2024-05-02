@@ -60,7 +60,12 @@ Imports:
     rlang,
     stats,
     tidyr,
-    utils
+    utils,
+    ggplot2,
+    ParamHelpers,
+    mlrMBO,
+    xgboost,
+    Matrix
 Suggests:
     broom.mixed,
     future, 
